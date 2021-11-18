@@ -17,6 +17,9 @@ namespace Universidad.Api.Mapping
 
             CreateMap<Estudio, EstudioDto>();
             CreateMap<EstudioDto, Estudio>();
+
+            CreateMap<Alumno, AlumnoDto>();
+            CreateMap<AlumnoDto, Alumno>();
         }
     }
 }
