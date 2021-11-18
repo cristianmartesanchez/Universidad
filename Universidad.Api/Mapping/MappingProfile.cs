@@ -20,6 +20,9 @@ namespace Universidad.Api.Mapping
 
             CreateMap<Alumno, AlumnoDto>();
             CreateMap<AlumnoDto, Alumno>();
+
+            CreateMap<Profesor, ProfesorDto>();
+            CreateMap<ProfesorDto, Profesor>();
         }
     }
 }
