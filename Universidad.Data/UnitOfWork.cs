@@ -15,6 +15,7 @@ namespace Universidad.Data
         private AlumnoRepository _alumnoRepository;
         private ProfesorRepository _profesorRepository;
         private AulaRepository _aulaRepository;
+        private AsignaturaRepository _asignaturaRepository;
 
         public UnitOfWork(DataContext context)
         {
@@ -26,6 +27,7 @@ namespace Universidad.Data
         public IAlumnoRepository Alumno => _alumnoRepository = _alumnoRepository ?? new AlumnoRepository(_context);
         public IProfesorRepository Profesor => _profesorRepository = _profesorRepository ?? new ProfesorRepository(_context);
         public IAulaRepository Aula => _aulaRepository = _aulaRepository ?? new AulaRepository(_context);
+        public IAsignaturaRepository Asignatura => _asignaturaRepository = _asignaturaRepository ?? new AsignaturaRepository(_context);
 
         public async Task<int> CommitAsync()
         {

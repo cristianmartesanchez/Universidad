@@ -26,6 +26,9 @@ namespace Universidad.Api.Mapping
 
             CreateMap<Aula, AulaDto>();
             CreateMap<AulaDto, Aula>();
+
+            CreateMap<Asignatura, AsignaturaDto>();
+            CreateMap<AsignaturaDto, Asignatura>();
         }
     }
 }

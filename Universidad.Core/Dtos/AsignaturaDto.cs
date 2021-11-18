@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Universidad.Core.Models
+namespace Universidad.Core.Dtos
 {
-    public class Asignatura
+    public class AsignaturaDto
     {
         public int Id { get; set; }
         public string Codigo { get; set; }
@@ -14,8 +14,8 @@ namespace Universidad.Core.Models
         public int TipoId { get; set; }
         public string Nombre { get; set; }
         public int Creditos { get; set; }
-        //TODO: porque una lista de profesores???
-        public List<Profesor> Profesors { get; set; }
+
+        public List<ProfesorDto> Profesors { get; set; }
 
     }
 }
