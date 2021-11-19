@@ -11,6 +11,10 @@ namespace Universidad.Data
     {
         IUniversidadRepository Universidad { get; }
         IEstudioRepository Carrera { get; }
+        IAlumnoRepository Alumno { get; }
+        IProfesorRepository Profesor { get; }
+        IAulaRepository Aula { get; }
+        IAsignaturaRepository Asignatura { get; }
         Task<int> CommitAsync();
     }
 }
