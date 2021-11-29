@@ -16,6 +16,6 @@ namespace Universidad.Core.Models
         public string Telefono { get; set; }
         public string Direccion { get; set; }
 
-        public List<Estudio> Estudios { get; set; }
+        public List<Carreras> Estudios { get; set; }
     }
 }

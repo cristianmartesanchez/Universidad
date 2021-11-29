@@ -15,8 +15,8 @@ namespace Universidad.Api.Mapping
             CreateMap<Core.Models.Universidad, UniversidadDto>();
             CreateMap<UniversidadDto, Core.Models.Universidad>();
 
-            CreateMap<Estudio, EstudioDto>();
-            CreateMap<EstudioDto, Estudio>();
+            CreateMap<Carreras, CarrerasDto>();
+            CreateMap<CarrerasDto, Carreras>();
         }
     }
 }

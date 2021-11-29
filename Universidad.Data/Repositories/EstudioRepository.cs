@@ -10,12 +10,12 @@ using Universidad.Data.Repositories;
 namespace Universidad.Core.Repositories
 {
 
-    public interface IEstudioRepository : IRepository<Estudio>
+    public interface IEstudioRepository : IRepository<Carreras>
     {
 
     }
 
-    public class EstudioRepository : Repository<Estudio>, IEstudioRepository
+    public class EstudioRepository : Repository<Carreras>, IEstudioRepository
     {
         private readonly DataContext _context;
         public EstudioRepository(DataContext context): base(context)

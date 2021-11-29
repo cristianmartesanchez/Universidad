@@ -14,6 +14,6 @@ namespace Universidad.Core.Dtos
         public string Telefono { get; set; }
         public string Direccion { get; set; }
 
-        public List<EstudioDto> Estudios { get; set; }
+        public List<CarrerasDto> Estudios { get; set; }
     }
 }

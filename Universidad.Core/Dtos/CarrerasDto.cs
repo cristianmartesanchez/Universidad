@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Universidad.Core.Models
+namespace Universidad.Core.Dtos
 {
-    public class Estudio
+    public class CarrerasDto
     {
-        [Key]
+
         public int Id { get; set; }
         public string Codigo { get; set; }
         public int UniversidadId { get; set; }
@@ -17,7 +17,7 @@ namespace Universidad.Core.Models
         public int TotalCredito { get; set; }
         public int Duracion { get; set; }
 
-        public Universidad Universidad { get; set; }
+        public UniversidadDto Universidad { get; set; }
 
     }
 }

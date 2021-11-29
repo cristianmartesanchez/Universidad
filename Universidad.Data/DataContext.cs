@@ -7,7 +7,7 @@ namespace Universidad.Data
     public class DataContext : DbContext
     {
         public DbSet<Core.Models.Universidad> Universidads { get; set; }
-        public DbSet<Estudio> Carreras { get; set; }
+        public DbSet<Carreras> Carreras { get; set; }
         public DbSet<Alumno> Alumnos { get; set; }
         public DbSet<Asignatura> Asignaturas { get; set; }
         public DbSet<EstudioAsignatura> EstudioAsignaturas { get; set; }
