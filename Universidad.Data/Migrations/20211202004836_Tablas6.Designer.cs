@@ -10,15 +10,15 @@ using Universidad.Data;
 namespace Universidad.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211101180808_InitialModel")]
-    partial class InitialModel
+    [Migration("20211202004836_Tablas6")]
+    partial class Tablas6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Universidad.Core.Models.Alumno", b =>
@@ -55,17 +55,8 @@ namespace Universidad.Data.Migrations
                     b.Property<string>("Codigo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Creditos")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProfesorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -90,63 +81,7 @@ namespace Universidad.Data.Migrations
                     b.ToTable("Aulas");
                 });
 
-            modelBuilder.Entity("Universidad.Core.Models.AulaAsignatura", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AsignaturaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AulaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Dia")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("HoraFin")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("HoraInicio")
-                        .HasColumnType("time");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AsignaturaId");
-
-                    b.HasIndex("AulaId");
-
-                    b.ToTable("AulaAsignaturas");
-                });
-
-            modelBuilder.Entity("Universidad.Core.Models.Cursa", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AlumnoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AsignaturaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Calificacion")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlumnoId");
-
-                    b.HasIndex("AsignaturaId");
-
-                    b.ToTable("Cursas");
-                });
-
-            modelBuilder.Entity("Universidad.Core.Models.Estudio", b =>
+            modelBuilder.Entity("Universidad.Core.Models.Carreras", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -165,7 +100,7 @@ namespace Universidad.Data.Migrations
                     b.Property<int>("TotalCredito")
                         .HasColumnType("int");
 
-                    b.Property<int>("UniversidadId")
+                    b.Property<int?>("UniversidadId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -175,7 +110,75 @@ namespace Universidad.Data.Migrations
                     b.ToTable("Carreras");
                 });
 
-            modelBuilder.Entity("Universidad.Core.Models.EstudioAsignatura", b =>
+            modelBuilder.Entity("Universidad.Core.Models.Cursa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AlumnoId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ExamenFinal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Practicas")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrimerParcial")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SeccionId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SegundoParcial")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlumnoId");
+
+                    b.HasIndex("SeccionId");
+
+                    b.ToTable("Cursas");
+                });
+
+            modelBuilder.Entity("Universidad.Core.Models.Pensum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CarreraId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PreCarreraId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("TotalCreditos")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UniversidadId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarreraId");
+
+                    b.HasIndex("UniversidadId");
+
+                    b.ToTable("Pensums");
+                });
+
+            modelBuilder.Entity("Universidad.Core.Models.PensumDetalle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,16 +188,22 @@ namespace Universidad.Data.Migrations
                     b.Property<int>("AsignaturaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EstudioId")
+                    b.Property<int>("Creditos")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PensumId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PreRequisitosId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AsignaturaId");
 
-                    b.HasIndex("EstudioId");
+                    b.HasIndex("PensumId");
 
-                    b.ToTable("EstudioAsignaturas");
+                    b.ToTable("PensumDetalle");
                 });
 
             modelBuilder.Entity("Universidad.Core.Models.Profesor", b =>
@@ -207,9 +216,6 @@ namespace Universidad.Data.Migrations
                     b.Property<string>("Apellido")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("AsignaturaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Codigo")
                         .HasColumnType("int");
 
@@ -221,9 +227,52 @@ namespace Universidad.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Profesors");
+                });
+
+            modelBuilder.Entity("Universidad.Core.Models.Seccion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AsignaturaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AulaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Año")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cuantrimestre")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("HoraEntrada")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("HoraSalida")
+                        .HasColumnType("time");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProfesorId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("TotalHoras")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("AsignaturaId");
 
-                    b.ToTable("Profesors");
+                    b.HasIndex("AulaId");
+
+                    b.HasIndex("ProfesorId");
+
+                    b.ToTable("Seccions");
                 });
 
             modelBuilder.Entity("Universidad.Core.Models.Universidad", b =>
@@ -250,7 +299,71 @@ namespace Universidad.Data.Migrations
                     b.ToTable("Universidads");
                 });
 
-            modelBuilder.Entity("Universidad.Core.Models.AulaAsignatura", b =>
+            modelBuilder.Entity("Universidad.Core.Models.Carreras", b =>
+                {
+                    b.HasOne("Universidad.Core.Models.Universidad", null)
+                        .WithMany("Estudios")
+                        .HasForeignKey("UniversidadId");
+                });
+
+            modelBuilder.Entity("Universidad.Core.Models.Cursa", b =>
+                {
+                    b.HasOne("Universidad.Core.Models.Alumno", "Alumno")
+                        .WithMany()
+                        .HasForeignKey("AlumnoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Universidad.Core.Models.Seccion", "Seccion")
+                        .WithMany()
+                        .HasForeignKey("SeccionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Alumno");
+
+                    b.Navigation("Seccion");
+                });
+
+            modelBuilder.Entity("Universidad.Core.Models.Pensum", b =>
+                {
+                    b.HasOne("Universidad.Core.Models.Carreras", "Carrera")
+                        .WithMany()
+                        .HasForeignKey("CarreraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Universidad.Core.Models.Universidad", "Universidad")
+                        .WithMany()
+                        .HasForeignKey("UniversidadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Carrera");
+
+                    b.Navigation("Universidad");
+                });
+
+            modelBuilder.Entity("Universidad.Core.Models.PensumDetalle", b =>
+                {
+                    b.HasOne("Universidad.Core.Models.Asignatura", "Asignatura")
+                        .WithMany()
+                        .HasForeignKey("AsignaturaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Universidad.Core.Models.Pensum", "Pensum")
+                        .WithMany()
+                        .HasForeignKey("PensumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Asignatura");
+
+                    b.Navigation("Pensum");
+                });
+
+            modelBuilder.Entity("Universidad.Core.Models.Seccion", b =>
                 {
                     b.HasOne("Universidad.Core.Models.Asignatura", "Asignatura")
                         .WithMany()
@@ -264,70 +377,17 @@ namespace Universidad.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Asignatura");
-
-                    b.Navigation("Aula");
-                });
-
-            modelBuilder.Entity("Universidad.Core.Models.Cursa", b =>
-                {
-                    b.HasOne("Universidad.Core.Models.Alumno", "Alumno")
+                    b.HasOne("Universidad.Core.Models.Profesor", "Profesor")
                         .WithMany()
-                        .HasForeignKey("AlumnoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Universidad.Core.Models.Asignatura", "Asignatura")
-                        .WithMany()
-                        .HasForeignKey("AsignaturaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Alumno");
-
-                    b.Navigation("Asignatura");
-                });
-
-            modelBuilder.Entity("Universidad.Core.Models.Estudio", b =>
-                {
-                    b.HasOne("Universidad.Core.Models.Universidad", "Universidad")
-                        .WithMany("Estudios")
-                        .HasForeignKey("UniversidadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Universidad");
-                });
-
-            modelBuilder.Entity("Universidad.Core.Models.EstudioAsignatura", b =>
-                {
-                    b.HasOne("Universidad.Core.Models.Asignatura", "Asignatura")
-                        .WithMany()
-                        .HasForeignKey("AsignaturaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Universidad.Core.Models.Estudio", "Estudio")
-                        .WithMany()
-                        .HasForeignKey("EstudioId")
+                        .HasForeignKey("ProfesorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Asignatura");
 
-                    b.Navigation("Estudio");
-                });
+                    b.Navigation("Aula");
 
-            modelBuilder.Entity("Universidad.Core.Models.Profesor", b =>
-                {
-                    b.HasOne("Universidad.Core.Models.Asignatura", null)
-                        .WithMany("Profesors")
-                        .HasForeignKey("AsignaturaId");
-                });
-
-            modelBuilder.Entity("Universidad.Core.Models.Asignatura", b =>
-                {
-                    b.Navigation("Profesors");
+                    b.Navigation("Profesor");
                 });
 
             modelBuilder.Entity("Universidad.Core.Models.Universidad", b =>

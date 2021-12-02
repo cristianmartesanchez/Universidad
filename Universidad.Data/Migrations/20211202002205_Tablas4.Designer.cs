@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Universidad.Data;
 
 namespace Universidad.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211202002205_Tablas4")]
+    partial class Tablas4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,26 +120,17 @@ namespace Universidad.Data.Migrations
                     b.Property<int>("AlumnoId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("ExamenFinal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Practicas")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("PrimerParcial")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("SeccionId")
+                    b.Property<int>("AsignaturaId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SegundoParcial")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Calificacion")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AlumnoId");
 
-                    b.HasIndex("SeccionId");
+                    b.HasIndex("AsignaturaId");
 
                     b.ToTable("Cursas");
                 });
@@ -241,18 +234,6 @@ namespace Universidad.Data.Migrations
                     b.Property<int>("AulaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Año")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cuantrimestre")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("HoraEntrada")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("HoraSalida")
-                        .HasColumnType("time");
-
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
@@ -312,15 +293,15 @@ namespace Universidad.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Universidad.Core.Models.Seccion", "Seccion")
+                    b.HasOne("Universidad.Core.Models.Asignatura", "Asignatura")
                         .WithMany()
-                        .HasForeignKey("SeccionId")
+                        .HasForeignKey("AsignaturaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Alumno");
 
-                    b.Navigation("Seccion");
+                    b.Navigation("Asignatura");
                 });
 
             modelBuilder.Entity("Universidad.Core.Models.Pensum", b =>

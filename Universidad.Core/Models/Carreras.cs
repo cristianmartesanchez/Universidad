@@ -15,8 +15,9 @@ namespace Universidad.Core.Models
         public string Nombre { get; set; }
         public int TotalCredito { get; set; }
         public int Duracion { get; set; }
+        //public int UniversidadId { get; set; }
 
-        public Universidad Universidad { get; set; }
+        //public Universidad Universidad { get; set; }
 
     }
 }

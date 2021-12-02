@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Universidad.Core.Models
 {
-    public class EstudioAsignatura
+    public class PensumDetalle
     {
-        [Key]
-        public int Id { get; set; }       
-        public int CarreraId { get; set; }
+        public int Id { get; set; }
+        public int PensumId { get; set;}
         public int AsignaturaId { get; set; }
-        public Carreras Estudio { get; set; }
+        public int PreRequisitosId { get; set; }
+        public int Creditos { get; set; }      
+        public Pensum Pensum { get; set; }
         public Asignatura Asignatura { get; set; }
+
     }
 }

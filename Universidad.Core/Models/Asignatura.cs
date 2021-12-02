@@ -10,11 +10,8 @@ namespace Universidad.Core.Models
     {
         public int Id { get; set; }
         public string Codigo { get; set; } 
-        public int TipoId { get; set; }
         public string Nombre { get; set; }
-        public int Creditos { get; set; }
 
-        public Carreras Carreras { get; set; }
-
+        
     }
 }
